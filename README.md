@@ -112,16 +112,16 @@ nfse_4730.xml
 Arquivo: utils/cnpj.json
 ```bash
 {
-    "33592510037821": "FERROVIA",
-    "33592510043473": "PELOTIZACAO",
-    "33592510042400": "PORTO",
-    "33931478000275": "SALOBO",
-    "48256824000668": "ONCA PUMA",
-    "33592510008996": "S11D",
-    "33592510037074": "CARAJAS",
-    "33592510045174": "SERRA LESTE",
-    "33931478000941": "SOSSEGO",
-    "33592510010117": "TERMINAL DE COBRE"
+    "CNPJ-CLIENTE": "FERROVIA",
+    "CNPJ-CLIENTE": "PELOTIZACAO",
+    "CNPJ-CLIENTE": "PORTO",
+    "CNPJ-CLIENTE": "SALOBO",
+    "CNPJ-CLIENTE": "ONCA PUMA",
+    "CNPJ-CLIENTE": "S11D",
+    "CNPJ-CLIENTE": "CARAJAS",
+    "CNPJ-CLIENTE": "SERRA LESTE",
+    "CNPJ-CLIENTE": "SOSSEGO",
+    "CNPJ-CLIENTE": "TERMINAL DE COBRE"
 }
 ```
 Este dicionário identifica e classifica automaticamente o cliente e o destino da nota com base no CNPJ da VALE informado no PDF.
