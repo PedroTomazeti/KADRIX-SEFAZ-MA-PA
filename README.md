@@ -89,9 +89,12 @@ KADRIX-SEFAZ
 
 4. Automação Web (Selenium)
 
-SEFAZ-MA (web_app_slz.py): Emissão direta e download automático via interface.
+> 💡 O módulo **selenium-wire** foi utilizado para capturar e analisar as requisições HTTP enviadas pelo navegador durante a emissão das notas, permitindo identificar as chamadas responsáveis pelos downloads de **PDF** e **XML**.  
+> Dessa forma, o sistema consegue replicar essas requisições autenticadas diretamente em Python, sem depender da interface gráfica para realizar o download dos arquivos.
 
-SEFAZ-PA (web_app_prp.py): Captura de sessão e download via requisições autenticadas.
+> SEFAZ-MA (web_app_slz.py): Emissão direta e download automático via interface.
+
+> SEFAZ-PA (web_app_prp.py): Captura de sessão e download via requisições autenticadas.
 
 5. Renomeação e Organização de Arquivos
 → Os arquivos são salvos conforme o padrão:
