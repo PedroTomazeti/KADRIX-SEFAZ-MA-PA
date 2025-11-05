@@ -178,8 +178,8 @@ Executar KADRIX SEFAZ.exe dentro da pasta /dist/
 A interface GUI será iniciada automaticamente.
 
 🧩 Manutenção e Suporte
-Desenvolvimento:
-Equipe de Automação — Kairós Motores
-Cliente:
-VALE S.A. — Unidades Maranhão e Pará
+Desenvolvimento:<br>
+Equipe de Automação — Kairós Motores<br>
+Cliente:<br>
+VALE S.A. — Unidades Maranhão e Pará<br>
 Última atualização: Novembro/2025
