@@ -15,7 +15,7 @@ O sistema processa automaticamente os e-mails de faturamento recebidos, analisa 
 ## ⚙️ Principais Funcionalidades
 
 ### 📨 Processamento Automático de E-mails
-- Lê e processa automaticamente e-mails com o assunto **“FATURAMENTO DE SERVIÇOS”**.  
+- Lê e processa automaticamente e-mails com o assunto **“FATURAMENTO DE SERVIÇOS”** (e-mail baseado no Locaweb).  
 - Identifica e valida anexos **PDF**, evitando duplicidades.  
 - Analisa o texto do corpo do e-mail e compara com a descrição dentro do PDF.  
 - Realiza **correções automáticas** quando há divergência nas descrições de serviço.
