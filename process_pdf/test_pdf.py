@@ -1,0 +1,107 @@
+import fitz  # PyMuPDF
+import os
+
+def verifica_unidade(unidade):
+    if unidade == "09100077000299":
+        unidade_desejada = 1
+    elif unidade == "09100077000370":
+        unidade_desejada = 2
+
+    return unidade_desejada
+
+def ler_primeira_pagina(caminho_pdf):
+    with fitz.open(caminho_pdf) as doc:
+        primeira_pagina = doc[0]
+        texto = primeira_pagina.get_text()
+    return texto
+
+def extrair_dados(texto):
+    dados = {}
+    linhas = texto.splitlines()
+
+    for i, linha in enumerate(linhas):
+        if 'Nº FRS' in linha:
+            dados['frs'] = linha.split(':')[-1].strip()
+        elif 'Nº RF' in linha:
+            dados['rf'] = linha.split(':')[-1].strip()
+        elif 'Nº Pedido/item' in linha:
+            num_pedido = linha.split(':')[-1].strip()
+            dados['pedido_item'] = num_pedido.split("/", 1)[0]
+        elif 'Razão Social:' in linha:
+            dados['razao_social_cliente'] = linha.split(':')[-1].strip()
+        elif 'CNPJ:' in linha and 'I.E.' in linha:
+            cnpj_ie = linha.split('CNPJ:')[-1]
+            dados['cnpj_cliente'] = cnpj_ie.split('I.E.')[0].strip().replace(".", "").replace("-", "").replace("/", "")
+        elif 'Razão Social:KAIROS' in linha:
+            dados['razao_social_fornecedor'] = linha.split(':')[-1].strip()
+        elif 'CNPJ:' in linha:
+            dados['cnpj_fornecedor'] = linha.split(':')[-1].strip().replace(".", "").replace("-", "").replace("/", "")
+        elif 'Valor do Serviço(s)' in linha:
+            dados['valor_bruto'] = linhas[i+1].strip()
+        elif 'INSS:' in linha:
+            dados['iss'] = linhas[i+1].split()[0].strip()
+            
+    return dados
+
+def verificar_ocorrencias(dados_extraidos, texto_base):
+    # Lista de chaves que você deseja verificar
+    chaves_para_verificar = ['frs', 'rf', 'pedido_item']
+    campos_faltantes = []
+
+    for chave in chaves_para_verificar:
+        valor = dados_extraidos.get(chave, '')
+        if valor and valor in texto_base:
+            print(f"✅ Valor '{valor}' encontrado no texto.")
+        
+        elif valor:
+            print(f"❌ Valor '{valor}' NÃO encontrado no texto.")
+
+            campos_faltantes.append(chave)
+    
+    return campos_faltantes
+
+def analise_arquivo(filename, descricao):
+    # Caminho completo do PDF
+    caminho_pdf = os.path.join('C:/Users/Pedro/Documents/KADRIX-SEFA/anexos_email', filename)
+    print(f"\n📄 Processando arquivo: {filename}")
+
+    # Verifica se o arquivo é um PDF e se existe
+    if not (filename.lower().endswith(".pdf") and os.path.isfile(caminho_pdf)):
+        print("⚠️ Arquivo inválido ou inexistente.")
+
+        return
+
+    try:
+        # Ler conteúdo da primeira página
+        texto = ler_primeira_pagina(caminho_pdf)
+
+        # Extrair dados do texto
+        dados_extraidos = extrair_dados(texto)
+
+        # Mostrar resultados
+        if dados_extraidos:
+            print("✅ Dados extraídos:")
+
+            for chave, valor in dados_extraidos.items():
+                print(f"🔸 {chave}: {valor}")
+
+            campos_incorretos = verificar_ocorrencias(dados_extraidos, descricao)
+            
+            if len(campos_incorretos) == 0:
+                print("Todas as informações estão corretas.")
+                
+                return dados_extraidos
+            else:
+                print(f"Campos que estão incorretos: {', '.join(campos_incorretos)}")
+
+                return dados_extraidos
+
+        else:
+            print("⚠️ Nenhum dado relevante encontrado no PDF.")
+            
+            return dados_extraidos
+        
+    except Exception as e:
+        print(f"❌ Erro ao processar o PDF: {e}")
+
+        return dados_extraidos
