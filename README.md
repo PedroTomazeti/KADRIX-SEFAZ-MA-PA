@@ -176,3 +176,10 @@ python -m app.app
 ⚙️ Via Executável
 Executar KADRIX SEFAZ.exe dentro da pasta /dist/
 A interface GUI será iniciada automaticamente.
+
+🧩 Manutenção e Suporte
+Desenvolvimento:
+Equipe de Automação — Kairós Motores
+Cliente:
+VALE S.A. — Unidades Maranhão e Pará
+Última atualização: Novembro/2025
